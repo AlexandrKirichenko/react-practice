@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { Posts } from './components/Posts'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    state = {
+        posts: [
+            { id: 'abc1', name: 'JS Basics' },
+            { id: 'abc2', name: 'JS Advanced' },
+            { id: 'abc3', name: 'Recat JS' },
+        ],
+    };
+
+    removePost = (id) => {
+        this.setState({posts: this.state.posts.filter((post) => post.id !== id)})
+    }
+
+    render() {
+        const { posts } = this.state;
+
+        return (
+            <div className="App">
+                <Posts posts={posts} removePost={this.removePost}/>
+            </div>
+        );
+    }
 }
 
 export default App;
